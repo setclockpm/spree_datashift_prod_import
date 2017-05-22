@@ -1,7 +1,7 @@
 SpreeDatashiftProdImport
 ========================
 
-Introduction goes here.
+This is the same gem just with the user_import and order_import tabs removed and also the Shopify methods removed.
 
 Installation
 ------------
