@@ -1,6 +1,5 @@
 class Spree::Admin::ProductImportsController < Spree::Admin::BaseController
   SAMPLE_CSV_FILE = Rails.root.join("sample_csv", "SpreeMultiVariant.csv")
-  SAMPLE_SHOPIFY_EXPORT_CSV_FILE = Rails.root.join("sample_csv", "shopify_products_export.csv")
 
   def index
     render
