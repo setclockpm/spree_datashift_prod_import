@@ -1,41 +1,129 @@
-<h1>Sample Import</h1>
-
-<% if(Spree::Product.count > 0) %>
-  <h2>It seems you have product data already,
-  <%= link_to "Clear Product Related Data", reset_admin_product_imports_path %>
-  for better verification, After all Purpose is to check the capabilities and not test :P
-  </h2>
-<% end %>
-
-
-<%= link_to "Download Sample File", download_sample_csv_admin_product_imports_path %> and make edits and see customised Data :)
-
-<br />
-<br />
-
-<%= form_tag(user_csv_import_admin_product_imports_path, multipart: true) do %>
-  <%= file_field_tag :csv_file, accept: 'text/csv' %>
-  <%= submit_tag "Import" %>
-<% end %>
-
-<br />
-<br />
-
-<h4><%= link_to "Start Import with Sample File", sample_csv_import_admin_product_imports_path, method: :post %></h4>
-
-<br />
-
-<table border="0" cellspacing="5" cellpadding="5">
-  <tr>
-  <% @csv_table.headers.each do |header| %>
-    <th><%= header %></th>
-  <% end %>
-  </tr>
-  <% @csv_table.each do |row| %>
-    <tr>
-    <% row.each do |element| %>
-      <td><%= element[1] %></td>
+<section id="product-imports-main">
+  <h1>Product Data Import Form</h1>
+  
+  <div class="intro">
+    <div class="alert alert-info no-objects-found">
+      <% if(Spree::Product.count > 1) %>
+        <%= fa_icon("info-circle", text: "The database contains #{Spree::Product.count} products right now.") %>
+      <% elsif(Spree::Product.count > 0) %>
+        <%= fa_icon("info-circle", text: "There is currently #{Spree::Product.count} lone product in the database.") %>
+      <% else %>
+        <%= fa_icon("info-circle", text: 'There are no products in the database right now.') %>
+      <% end %>
+    </div>
+  </div>
+  
+  
+  <div id="import-templates">
+    <div class="row">
+      <div id="clear-product-data" class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h1 class="panel-title">
+              Sample Product Data & Templates
+            </h1>
+          </div>
+          <div class="panel-body">
+            A Sample CSV Template will always be kept here to reference.
+            If you'd like to quickly test the import engine out without making any changes to it by clicking 
+            <span class="bold bold-text">Quick Import Test</span>.
+            <br><br>
+            <%= link_to_with_icon 'play', "Quick Import Test", sample_csv_import_admin_product_imports_path, method: :post, class: "btn btn-default btn-success" %>
+            <br>
+            <br>
+            You may also choose to download it to make any edits you'd like. You may even choose to upload that same edited sample to test it out. 
+            The upload form is further down the page in the import section.
+            <br><br>
+            <%= link_to_with_icon 'eye-open', "Download Sample CSV Template File", download_sample_csv_admin_product_imports_path, class: "btn btn-default" %>
+            <br><br>
+          </div>
+          <div class="panel-heading">
+            <h1 class="panel-title">
+              Contents of the Sample CSV Template:
+            </h1>
+          </div>
+          <div class="panel-body" style="border-top:1px solid #ccc; overflow-x:scroll;">
+            <table class="spreadsheet-preview" border="0" cellspacing="5" cellpadding="5">
+              <tr>
+              <% @csv_table.headers.each do |header| %>
+                <th><%= header %></th>
+              <% end %>
+              </tr>
+              <% @csv_table.each do |row| %>
+                <tr>
+                <% row.each do |element| %>
+                  <td><%= element[1] %></td>
+                <% end %>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+          
+          <div class="panel-footer">
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+  
+  <div class="row import-spreadsheet-row">
+    <div id="bulk-import-skus-form" class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h1 class="panel-title">Upload Product Data (CSV)</h1></div>
+        <div class="panel-body">
+          <%= form_tag(user_csv_import_admin_product_imports_path, multipart: true) do %>
+            <fieldset data-hook="bulk-inventory-import">
+              <div data-hook="bulk-inventory-import-form-fields" class="row">
+                <div class="col-md-6">
+                  <div data-hook="file">
+                    <% spreadsheet_mime_types = 'text/csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.dataml.sheet' %>
+                    <%= label_tag :data, Spree.t(:excel_file) %>
+                    <%= file_field_tag :csv_file,  accept: spreadsheet_mime_types %>
+                  </div>
+                </div>
+              </div>
+              <div class="form-actions" data-hook="buttons">
+                <%= button Spree.t(:import), 'import', 'Import', { class: 'btn btn-primary' } %>
+                <span class="or"><%= Spree.t(:or) %></span>
+                <%= button_link_to Spree.t('actions.cancel'), spree.admin_products_url, icon: 'delete', id: 'cancel_link' %>
+              </div>
+            </fieldset>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+    <% if(Spree::Product.count > 0) %>
+      <div class="development demo">
+        <div class="row">
+          <div id="clear-product-data" class="col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h1 class="panel-title">
+                  Clear Product Data
+                </h1>
+              </div>
+              <div class="panel-body">
+                Click below if data needs to be cleared or reset.
+                <br><br>
+                <% if can?(:destroy, Spree::Product.first) %>
+                  <%= link_to_with_icon 'delete', "Clear All Product Data", reset_admin_product_imports_path, class: "btn btn-default btn-danger" %>
+                <% end %>
+              </div>
+              <div class="panel-footer">
+                Once again, use with caution!
+              </div>
+            </div>
+          </div>
+        </div>  
+      </div>
     <% end %>
-    </tr>
-  <% end %>
-</table>
+
+</section>
+
+
+
+<br />
+<br />
+
+

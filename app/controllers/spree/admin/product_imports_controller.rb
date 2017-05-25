@@ -1,13 +1,14 @@
 class Spree::Admin::ProductImportsController < Spree::Admin::BaseController
-  SAMPLE_CSV_FILE = Rails.root.join("sample_csv", "SpreeMultiVariant.csv")
-
+  SAMPLE_CSV_FILE = Rails.root.join("db/datashift/templates", "SpreeMultiVariant.csv")
+  # SAMPLE_CSV_FILE = Rails.root.join("sample_csv", "SpreeMultiVariant.csv")
+  
   def index
     render
   end
 
   def reset
-    truncated_list = ['spree_products_taxons', 'spree_option_values_variants',
-                      'spree_products_promotion_rules', 'spree_product_option_types']
+    truncated_list = ['spree_products_taxons', 'spree_option_value_variants',
+                      'spree_product_promotion_rules', 'spree_product_option_types']
     result_log = []
     truncated_list.inject(result_log) do |r,t|
       c = "TRUNCATE #{t}"
@@ -49,7 +50,7 @@ class Spree::Admin::ProductImportsController < Spree::Admin::BaseController
       r.push(s)
     end
 
-    redirect_to admin_product_imports_path, flash: {notice: result_log.join("---,---")}
+    redirect_to admin_product_imports_path, flash: { notice: result_log.join("---,---") }
   end
 
   def sample_import
@@ -68,7 +69,7 @@ class Spree::Admin::ProductImportsController < Spree::Admin::BaseController
   def sample_csv_import
     opts = {}
     opts[:mandatory] = ['sku', 'name', 'price']
-    loader = DataShift::SpreeEcom::ProductLoader.new( nil, {:verbose => true})
+    loader = DataShift::SpreeEcom::ProductLoader.new( nil, { verbose: true })
     loader.perform_load(SAMPLE_CSV_FILE, opts)
     redirect_to admin_product_imports_path, flash: { notice: "Check Sample Imported Data" }
   end
@@ -76,7 +77,7 @@ class Spree::Admin::ProductImportsController < Spree::Admin::BaseController
   def user_csv_import
     opts = {}
     opts[:mandatory] = ['sku', 'name', 'price']
-    loader = DataShift::SpreeEcom::ProductLoader.new( nil, {:verbose => true})
+    loader = DataShift::SpreeEcom::ProductLoader.new( nil, { verbose: true })
     message = "Check Imported Data"
     if params[:csv_file]
       if params[:csv_file].respond_to?(:path)

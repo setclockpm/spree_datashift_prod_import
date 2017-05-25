@@ -2,7 +2,12 @@ SpreeDatashiftProdImport
 ========================
 
 This is the same gem just with the user_import and order_import tabs removed and also the Shopify methods removed.
-Some Styling has also been added to the forms. That's all!
+Some Styling has also been added to the forms. 
+
+Lastly because I am using Spree -v ~>3.1.0
+I had to change the update the table names in the controllers to match the version of Spree I have.
+(They've renamed a few)
+That's why I added the dependency parameter in the gemspec of ~> 3.1.0
 
 Installation
 ------------

@@ -3,3 +3,7 @@
 
 en:
   hello: "Hello world"
+  spree:
+     import: Import
+     excel_file: "Spreadsheet File"
+     csv_file: "Spreadsheet File"
