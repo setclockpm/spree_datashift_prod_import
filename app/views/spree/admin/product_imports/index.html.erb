@@ -1,26 +1,72 @@
-<h1>Product Import Demo using <a href="https://github.com/autotelik/datashift_spree" target="_blank">datashift_spree</a></h1>
+<section id="product-imports-main">
+  <h1>Product Data Import Main Page</h1>
+
+  <div class="intro">
+    Click below to proceed to the Product Import Main Page<br>
+    <%= link_to "Product Import Main Page", sample_import_admin_product_imports_path, class: "btn btn-default btn-primary" %>
+    <br><br>
+  </div>
 
 
-As its a demo, <%= link_to "Clear Product Related Data", reset_admin_product_imports_path %> to have blank slate
-and verify the data you get after <%= link_to "Sample Import", sample_import_admin_product_imports_path %>
+  <div class="verification-links">
+    <div class="row">
+      <div id="clear-product-data" class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h1 class="panel-title">
+              Verify Imported Data
+            </h1>
+          </div>
+          <div class="panel-body">
+            <%= link_to "Verify #{Spree::Product.count} Products (Variants) Here", admin_products_path %>
+            <br />
+            <br />
+            <%= link_to "Verify Option Types", admin_option_types_path %>
+            <br />
+            <%= link_to "Verify Option Values", admin_option_types_path %>
+            <br />
+            <%= link_to "Verify Shipping Categories", admin_shipping_categories_path %>
+            <br />
+            <%= link_to "Verify Tax Categories", admin_tax_categories_path %>
+            <br />
+            <%= link_to "Verify Stock Movements", admin_stock_locations_path %>
+            <br />
+            <%= link_to "Verify Product Properties", admin_properties_path %>
+            <br />
+            <%= link_to "Verify Taxonomies", admin_taxonomies_path %>
+            <br />
+            <%= link_to "Verify Taxons", admin_taxons_path %>
+          </div>
+          <div class="panel-footer">
+            Use the above links to click over to the product pages to verify the most recent import
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
 
-<br />
-<br />
-<%= link_to "Verify #{Spree::Product.count} Products and their Variants, Images,Stocks, Properties", admin_products_path %>
-<br />
-<br />
-<%= link_to "Verify Option Types", admin_option_types_path %>
-<br />
-<%= link_to "Verify Option Values", admin_option_types_path %>
-<br />
-<%= link_to "Verify Shipping Categories", admin_shipping_categories_path %>
-<br />
-<%= link_to "Verify Tax Categories", admin_tax_categories_path %>
-<br />
-<%= link_to "Verify Stock Movements", admin_stock_locations_path %>
-<br />
-<%= link_to "Verify Product Properties", admin_properties_path %>
-<br />
-<%= link_to "Verify Taxonomies", admin_taxonomies_path %>
-<br />
-<%= link_to "Verify Taxons", admin_taxons_path %>
+
+  <div class="development demo">
+    <div class="row">
+      <div id="clear-product-data" class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h1 class="panel-title">
+              Clear Product Data
+            </h1>
+          </div>
+          <div class="panel-body">
+            If this a demo or a developement environment you may clear the product data using the button below
+            <br><br>
+            <%= link_to_with_icon 'delete', "Clear Product Related Data Here", reset_admin_product_imports_path, class: "btn btn-default btn-danger" %>
+          </div>
+          <div class="panel-footer">
+            Use with caution!
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+  
+</section>
