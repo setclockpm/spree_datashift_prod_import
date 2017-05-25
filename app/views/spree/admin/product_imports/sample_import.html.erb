@@ -3,10 +3,10 @@
   
   <div class="intro">
     <div class="alert alert-info no-objects-found">
-      <% if(Spree::Product.count > 1) %>
-        <%= fa_icon("info-circle", text: "The database contains #{Spree::Product.count} products right now.") %>
-      <% elsif(Spree::Product.count > 0) %>
-        <%= fa_icon("info-circle", text: "There is currently #{Spree::Product.count} lone product in the database.") %>
+      <% if(Spree::Variant.count > 1) %>
+        <%= fa_icon("info-circle", text: "The database contains #{Spree::Variant.count} variants right now.") %>
+      <% elsif(Spree::Variant.count > 0) %>
+        <%= fa_icon("info-circle", text: "There is currently #{Spree::Product.count} lone product (variant) in the database.") %>
       <% else %>
         <%= fa_icon("info-circle", text: 'There are no products in the database right now.') %>
       <% end %>
