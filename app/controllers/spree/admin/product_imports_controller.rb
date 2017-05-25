@@ -55,7 +55,7 @@ class Spree::Admin::ProductImportsController < Spree::Admin::BaseController
 
   def sample_import
     if(File.exists? SAMPLE_CSV_FILE)
-      @csv_table = CSV.open(SAMPLE_CSV_FILE, :headers => true).read
+      @csv_table = CSV.open(SAMPLE_CSV_FILE, headers: true).read
       render
     else
       redirect_to admin_product_imports_path, flash: { error: "Sample Missing" }
