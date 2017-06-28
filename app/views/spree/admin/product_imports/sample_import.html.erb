@@ -93,7 +93,7 @@
       </div>
     </div>
     
-    <% if(Spree::Product.count > 0) %>
+    <% if(Spree::Product.count > 0) && !Rails.env.production? %>
       <div class="development demo">
         <div class="row">
           <div id="clear-product-data" class="col-md-6">
@@ -120,10 +120,7 @@
     <% end %>
 
 </section>
-
-
-
-<br />
-<br />
+<br/>
+<br/>
 
 
