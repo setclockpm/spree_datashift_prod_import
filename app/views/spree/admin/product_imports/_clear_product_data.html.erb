@@ -1,0 +1,21 @@
+<div class="development demo">
+  <div class="row">
+    <div id="clear-product-data" class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title"> Clear Product Data </h1>
+        </div>
+        <div class="panel-body">
+          Click below if data needs to be cleared or reset.
+          <br><br>
+          <% if can?(:destroy, Spree::Product.first) %>
+            <%= link_to_clear_product_data_with_icon %>
+          <% end %>
+        </div>
+        <div class="panel-footer">
+          Once again, use with caution!
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>

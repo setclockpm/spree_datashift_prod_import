@@ -1,0 +1,99 @@
+/*
+Placeholder manifest file.
+the installer will append this file to the app vendored assets here: 'vendor/assets/stylesheets/spree/backend/all.css'
+*/
+
+#export-product-data {
+  .right {
+    margin-top: 8px;
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+
+
+
+//%spinner {
+//  @extend [class^="icon-"];
+//
+//  @extend .icon-refresh;
+//
+//  @extend .icon-spin;
+//
+////  @include transition(opacity 1s ease, width 0.7s ease, height 0.3s ease);
+//
+//  position: relative;
+//  top: -1px;
+//  display: inline-block;
+//  overflow: hidden;
+//  text-decoration: inherit;
+//  vertical-align: middle;
+//  width: 0;
+//  height: 0;
+//  opacity: 0;
+//}
+////
+//%visible-spinner {
+//  width: 12px;
+//  height: 14px;
+//  opacity: 1;
+//}
+//
+//%error-spinner {
+//  @extend .icon-warning-sign;
+//
+//  @extend %visible-spinner;
+//
+//  @include vendor-prefix(animation, none);
+//
+//  content: '\f071';
+//  width: 16px;
+//  color: #fc0;
+//}
+
+// Spinner Element, works inside, before and after buttons and inside forms
+// <a href='action/1' class='btn btn-primary'><i class='spinner'></i>Button Text</a>
+// <i class='spinner'></i><a href='action/1' class='btn btn-primary'>Button Text</a>
+
+//.spinner {
+//  @extend %spinner;
+//
+//  left: -0.5em;
+//
+//  &.is-ajax-loading, .is-ajax-loading & {
+//    @extend %visible-spinner;
+//  }
+//}
+//
+//.is-ajax-error {
+//  .spinner, &.spinner {
+//    @extend %error-spinner;
+//  }
+//}
+
+// as CSS generated content inside buttons,
+// does not work with submit inputs, use <button type='submit'> with Spinner element instead
+
+//.btn-spinner {
+//  &:before {
+//    @extend %spinner;
+//
+//    left: -0.4em;
+//    content: '\f021';
+//  }
+//
+//  &.is-ajax-loading:before {
+//    @extend %visible-spinner;
+//  }
+//
+//  &.is-ajax-error:before {
+//    @extend %error-spinner;
+//  }
+//}
+//
+//form.is-ajax-loading .btn-spinner:before {
+//  @extend %visible-spinner;
+//}
+
+// as you may have expected, CSS animations (used in font-awesome's .icon-spin ) is poorly supported by IE.
+// It may work in IE10, no chance with lte IE9.

@@ -1,4 +1,4 @@
-class Spree::Admin::ProductImportsController < Spree::Admin::BaseController
+class Spree::Admin::ProductExportsController < Spree::Admin::BaseController
   SAMPLE_CSV_FILE = Rails.root.join("db/datashift/templates", "SpreeMultiVariant.csv")
   
   def index

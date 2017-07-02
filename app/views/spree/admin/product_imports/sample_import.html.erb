@@ -76,7 +76,6 @@
               <div data-hook="bulk-inventory-import-form-fields" class="row">
                 <div class="col-md-6">
                   <div data-hook="file">
-                    <% spreadsheet_mime_types = 'text/csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.dataml.sheet' %>
                     <%= label_tag :data, Spree.t(:excel_file) %>
                     <%= file_field_tag :csv_file,  accept: spreadsheet_mime_types %>
                   </div>
@@ -93,32 +92,8 @@
       </div>
     </div>
     
-    <% if(Spree::Product.count > 0) && !Rails.env.production? %>
-      <div class="development demo">
-        <div class="row">
-          <div id="clear-product-data" class="col-md-6">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h1 class="panel-title">
-                  Clear Product Data
-                </h1>
-              </div>
-              <div class="panel-body">
-                Click below if data needs to be cleared or reset.
-                <br><br>
-                <% if can?(:destroy, Spree::Product.first) %>
-                  <%= link_to_with_icon 'delete', "Clear All Product Data", reset_admin_product_imports_path, class: "btn btn-default btn-danger" %>
-                <% end %>
-              </div>
-              <div class="panel-footer">
-                Once again, use with caution!
-              </div>
-            </div>
-          </div>
-        </div>  
-      </div>
-    <% end %>
-
+    <%= render partial: "clear_product_data" unless Rails.env.production? %>
+    
 </section>
 <br/>
 <br/>

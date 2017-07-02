@@ -1,5 +1,5 @@
 <section id="product-imports-intro">
-  <h1>Product Data Import Main Page</h1>
+  <h1>Product Import / Export Main Page</h1>
 
   <div class="intro">
     Click below to proceed to the Product Import Main Page<br>
@@ -45,28 +45,34 @@
     </div>
     
   </div>
-
-
-  <div class="development demo">
+  
+  <div>
     <div class="row">
-      <div id="clear-product-data" class="col-md-6">
+      <div id="export-product-data" class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h1 class="panel-title">
-              Clear Product Data
+              Export Product Data
             </h1>
           </div>
           <div class="panel-body">
-            If this a demo or a developement environment you may clear the product data using the button below
-            <br><br>
-            <%= link_to_with_icon 'delete', "Clear Product Related Data Here", reset_admin_product_imports_path, class: "btn btn-default btn-danger" %>
+            <div class="col-sm-6">
+              <%= button_link_to Spree.t('actions.export'), spree.new_admin_product_export_url, icon: 'export', class: 'btn-primary', data: { action: 'export' } %>
+            </div>
+            <div class="col-sm-6 right">
+              <div class="hidden spinner">Loading</div>
+            </div>
           </div>
           <div class="panel-footer">
-            Use with caution!
+            Exports current product variants in csv format.
           </div>
         </div>
       </div>
-    </div>  
+    </div>
+    
   </div>
+
+  <%= render partial: "clear_product_data" unless Rails.env.production? %>
+  
   
 </section>
