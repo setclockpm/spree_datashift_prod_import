@@ -10,7 +10,7 @@ Spree::Core::Engine.routes.draw do
       end
     end
     resources :product_exports, only: [:new] do
-      get :master
+      get :download_csv
     end
   end
 end
