@@ -4,7 +4,12 @@ class Spree::Admin::ProductExportsController < Spree::Admin::BaseController
   
   
   def new
-    render
+    system "bundle exec thor datashift:export:csv --model=Spree::Variant --result=inventory.csv"
+    if $?.exitstatus > 0
+      flash[:error] = "Unable to generate export, check command line logs for more info."
+    end
+    head(:bad_request) and return unless File.exist?(CSV_FILE_NAME)
+    send_file CSV_FILE_LOCATION, filename: (params[:filename] || CSV_FILE_NAME), type: "text/csv"
   end
 
   def download_sample_csv
@@ -13,7 +18,7 @@ class Spree::Admin::ProductExportsController < Spree::Admin::BaseController
       flash[:error] = "Unable to generate export, check command line logs for more info."
     end
     head(:bad_request) and return unless File.exist?(CSV_FILE_NAME)
-    send_file CSV_FILE_LOCATION, filename: (params[:filename] || CSV_FILE_NAME), type: "text/csv,"
+    send_file CSV_FILE_LOCATION, filename: (params[:filename] || CSV_FILE_NAME), type: "text/csv"
   end
 
 end
