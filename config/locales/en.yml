@@ -6,5 +6,8 @@ en:
   spree:
      import: Import
      export: Export
+     generate: Generate
+     file: File
      excel_file: "Spreadsheet File"
      csv_file: "Spreadsheet File"
+     upload: Upload

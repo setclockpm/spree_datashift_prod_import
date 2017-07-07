@@ -2,8 +2,8 @@
   <h1>Product Import / Export Main Page</h1>
 
   <div class="intro">
-    Click below to proceed to the Product Import Main Page<br>
-    <%= link_to "Product Import Main Page", sample_import_admin_product_imports_path, class: "btn btn-default btn-primary" %>
+    Click below to proceed to the Product Data Upload Form<br>
+    <%= link_to_with_icon('upload', "Product Data Spreadsheet #{Spree.t(:upload)}", sample_import_admin_product_imports_path, class: "btn btn-default btn-primary") %>
     <br><br>
   </div>
 
@@ -43,7 +43,6 @@
         </div>
       </div>
     </div>
-    
   </div>
   
   <div>
@@ -56,20 +55,23 @@
             </h1>
           </div>
           <div class="panel-body">
-            <div class="col-sm-6">
-              <%= button_link_to Spree.t('actions.export'), spree.new_admin_product_export_url, icon: 'export', class: 'btn-primary', data: { action: 'export' } %>
+            <div class="col-lg-6">
+              <%= button_link_to_download_export(:csv) %>
+              <%= link_to_generate_export(:csv) %>
             </div>
-            <div class="col-sm-6 right">
+           
+            <div class="col-lg-6">
+              <%= button_link_to_download_export(:xls) %>
               <div class="hidden spinner">Loading</div>
+              <%= link_to_generate_export(:xls) %>
             </div>
           </div>
           <div class="panel-footer">
-            Exports current product variants in csv format.
+            Exports current product variants in spreadsheet format.
           </div>
         </div>
       </div>
     </div>
-    
   </div>
 
   <%= render partial: "clear_product_data" unless Rails.env.production? %>

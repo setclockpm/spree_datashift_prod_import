@@ -1,11 +1,19 @@
 class Spree::Admin::ProductImportsController < Spree::Admin::BaseController
   SAMPLE_CSV_FILE = Rails.root.join("db/datashift/templates", "SpreeMultiVariant.csv")
+  DATA_EXPORT_FILENAME = 'inventory'
+  DATA_EXPORT_LOCATION = Rails.root.join("db/datashift/exports", DATA_EXPORT_FILENAME)
   
   def index
+    # @data_export_file = DATA_EXPORT_LOCATION
     render
   end
 
+
   def reset
+    if Rails.env.production?
+      redirect_to admin_product_imports_path, flash: { notice: "Not authorized to perform this action." }
+    end
+      
     truncated_list = ['spree_products_taxons', 'spree_option_value_variants',
                       'spree_product_promotion_rules', 'spree_product_option_types']
     result_log = []

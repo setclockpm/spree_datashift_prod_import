@@ -34,8 +34,9 @@
             You may also choose to download it to make any edits you'd like. You may even choose to upload that same edited sample to test it out. 
             The upload form is further down the page in the import section.
             <br><br>
-            <%= link_to_with_icon 'eye-open', "Download Sample CSV Template File", download_sample_csv_admin_product_imports_path, class: "btn btn-default" %>
+            <%= link_to_with_icon 'eye-open', "Download Sample CSV Template File", download_sample_csv_admin_product_imports_path, class: "btn btn-default btn-primary" %>
             <br><br>
+            <%= link_to_with_icon 'chevron-left', "Back To Data Export Page", spree.admin_product_imports_url, class: "btn btn-default" %>
           </div>
           <div class="panel-heading">
             <h1 class="panel-title">
@@ -84,7 +85,7 @@
               <div class="form-actions" data-hook="buttons">
                 <%= button Spree.t(:import), 'import', 'Import', { class: 'btn btn-primary' } %>
                 <span class="or"><%= Spree.t(:or) %></span>
-                <%= button_link_to Spree.t('actions.cancel'), spree.admin_products_url, icon: 'delete', id: 'cancel_link' %>
+                <%= link_to_with_icon 'chevron-left', "Back To Data Export Page", spree.admin_product_imports_url, class: "btn btn-default" %>
               </div>
             </fieldset>
           <% end %>
