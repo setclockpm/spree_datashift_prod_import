@@ -6,9 +6,12 @@ Spree::Core::Engine.routes.draw do
         get :sample_import
         post :sample_csv_import
         post :user_csv_import
+        post :image_import
         get :download_sample_csv
       end
     end
+    # post "import/inventory_photos" => "data_import_utilities#inventory_photos",  as: :import_inventory_photos
+    
     resources :product_exports, only: [:new] do
       collection do
         get :generate

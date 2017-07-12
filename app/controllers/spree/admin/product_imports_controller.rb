@@ -80,22 +80,17 @@ class Spree::Admin::ProductImportsController < Spree::Admin::BaseController
     loader.perform_load(SAMPLE_CSV_FILE, opts)
     redirect_to admin_product_imports_path, flash: { notice: "Check Sample Imported Data" }
   end
-
-  def user_csv_import
-    opts = {}
-    opts[:mandatory] = ['sku', 'name', 'price']
-    loader = DataShift::SpreeEcom::ProductLoader.new( nil, { verbose: true })
-    message = "Check Imported Data"
-    if params[:csv_file]
-      if params[:csv_file].respond_to?(:path)
-        loader.perform_load(params[:csv_file].path, opts)
-      else
-        message = "Please upload a valid file"
-      end
+  
+  def image_import
+    generator = ImageGenerator.new
+    if generator.process
+      flash[:success] = "Image generation process complete!"
+      redirect_to admin_data_import_utilities_path
     else
-      message = "No File Given"
+      render 'products/data'
+      flash[:error] = "There was a problem importing your images."
     end
-    redirect_to admin_product_imports_path, flash: { notice: message }
   end
+  
 
 end
