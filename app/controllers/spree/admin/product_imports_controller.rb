@@ -85,7 +85,7 @@ class Spree::Admin::ProductImportsController < Spree::Admin::BaseController
     generator = ImageGenerator.new
     if generator.process
       flash[:success] = "Image generation process complete!"
-      redirect_to admin_data_import_utilities_path
+      redirect_to sample_import_admin_product_imports_path
     else
       render 'products/data'
       flash[:error] = "There was a problem importing your images."
