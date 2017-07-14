@@ -26,6 +26,12 @@ The importer will pick up a files in a particular format, namely a combinations 
 A typical SKU is know to have the format of:
 
     ABC123Z ORG
+what is generally accepted is:
+5-7 Alphanumeric characters a separator(space or hyphen) then 3 alphanumeric characters then another separator followed by a number then the '.jpg'
+    
+    FD234A GRY 3.JPG
+
+
 
 It is known that many image files can exist for one variant also.
 Taking into consideration these two, the correct format should be for the files in the dropbox should be:
@@ -55,7 +61,17 @@ This is OK (although total consistency across all SKUs/Variants is still recomme
     KCH333B BLK - 3.jpg
     KCH333B BLK - 4.jpg
 
+**Bonus**
 
+**The script can also deal with images that have the letters
+    
+    ALL or GRP
+eg
+
+    KCH556P ALL - 1.JPG
+    
+in the file name instead of the color name. This image will be created under the master variant and not associated with a specific variant (one that has a color property typically)
+So the image will belong to KCK555P and not randomly assigned to KCH555P NAT or any othe color
 
 
 SpreeDatashiftProdImport
